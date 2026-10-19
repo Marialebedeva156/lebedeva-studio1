@@ -1,0 +1,33 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="style.css"><title>Изменяем кириллицу на латиницу по клику</title><style>
+.passport-demo{position:relative;width:445px;height:620px;max-width:100%;margin:22px auto 26px;background:url('passport_russian.png') center top/100% 100% no-repeat;color:#343039;font-family:Arial,sans-serif;font-size:11px;box-shadow:0 14px 35px #0002;border-radius:4px}
+.passport-demo .field{position:absolute;line-height:1.2;font-weight:600;max-width:255px;overflow-wrap:anywhere}
+.passport-demo .issuer{top:83px;left:54px;font-size:10px;max-width:310px}.passport-demo .issued{top:151px;left:57px}.passport-demo .code{top:151px;left:293px}
+.passport-demo .surname{top:347px;left:162px}.passport-demo .firstname{top:379px;left:162px}.passport-demo .patronymic{top:408px;left:162px}.passport-demo .sex{top:439px;left:162px}.passport-demo .dob{top:439px;left:272px}.passport-demo .place{top:472px;left:162px}
+.passport-demo .photo-box img{width:100%;height:100%;object-fit:cover;display:block}.passport-demo .photo-box{position:absolute;left:24px;top:354px;width:105px;height:130px;background:#e8e4e1;border:1px solid #a9a0a0;display:grid;place-items:center;text-align:center;color:#777;font-size:10px;padding:0;overflow:hidden}
+/* При клике переключается именно фоновое изображение паспорта */
+.passport-demo.en{background-image:url('passport_english.jpg');filter:none}
+.passport-demo.en .issuer,.passport-demo.en .issued,.passport-demo.en .code{display:none}
+.passport-demo.en .surname{top:371px;left:165px}
+.passport-demo.en .firstname{top:399px;left:165px}
+.passport-demo.en .patronymic{top:420px;left:165px}
+.passport-demo.en .sex{top:450px;left:165px}
+.passport-demo.en .dob{top:450px;left:267px}
+.passport-demo.en .place{top:481px;left:165px}
+.passport-demo.en .photo-box{top:370px;left:28px;width:104px;height:129px}
+.passport-demo.en .watermark{display:none}
+.passport-demo .watermark{position:absolute;right:10px;bottom:88px;font-size:10px;letter-spacing:2px;color:#955c65;opacity:.65;transform:rotate(-12deg);pointer-events:none}
+.code-example{background:#f7f5f2;padding:20px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px}
+@media(max-width:500px){.passport-demo{transform-origin:top left;max-width:none}}
+</style></head><body id="top"><header><div class="topline">LEBEDEVA STUDIO · ЭСТЕТИКА В КАЖДОЙ ДЕТАЛИ</div><div class="brand"><a href="index.html">LEBEDEVA STUDIO<span>CONTEMPORARY WARDROBE</span></a></div><nav class="nav"><a href="index.html">Главная</a><a href="catalog.html">Коллекция</a><a href="contact.html">Заказ и контакты</a><a href="dom.html" class="">DOM_JS</a><a href="translit.html" class="active">Кириллица → латиница</a><a href="algorithm.html">Алгоритм</a></nav></header><main><div class="anchor-nav"><a href="#part1">Раздел 1</a><a href="#part2">Раздел 2</a><a href="#top">К началу ↑</a></div><div class="page-heading" id="part1"><span class="eyebrow">Задание 02 · JavaScript / click</span><h1>Изменяем кириллицу на латиницу по клику</h1><p>Как в примере преподавателя: по событию click изменяются HTML-элементы и оформление паспорта. Повторный клик возвращает исходные данные.</p></div><div class="passport-demo" id="passport" aria-label="Учебный макет разворота паспорта"><div class="field issuer" id="issuer">ГУ МВД России по городу Москве (учебные данные)</div><div class="field issued" id="issued">01.01.2025</div><div class="field code" id="code">000-000</div><div class="photo-box"><img src="my_passport_photo.jpg" alt="Фотография для учебного макета паспорта"></div><div class="field surname" id="surname">Лебедева</div><div class="field firstname" id="firstname">Мария</div><div class="field patronymic" id="patronymic">—</div><div class="field sex" id="sex">ЖЕН</div><div class="field dob" id="birthyear">2007</div><div class="field place" id="place">Москва</div><div class="watermark">УЧЕБНЫЙ МАКЕТ</div></div><section class="card" id="part2"><h2>Обработка события</h2><button class="btn" id="change">Заменить на латиницу</button><p class="note" id="state" aria-live="polite">Сейчас данные записаны кириллицей.</p><p>При переключении меняется также изображение паспорта: российский шаблон → англоязычный образец. Лебедева → Lebedeva, Мария → Maria, Москва → Moskva, ЖЕН → F. Год рождения остаётся 2007, так как цифры не меняются при транслитерации.</p></section><script>
+const change=document.getElementById('change');
+change.addEventListener('click',change_all);
+let english=false;
+function change_all(){
+ english=!english;
+ const values=english?{surname:'Lebedeva',firstname:'Maria',patronymic:'—',sex:'F',birthyear:'2007',place:'Moskva',issuer:'Moscow Department of Internal Affairs (sample)'}:{surname:'Лебедева',firstname:'Мария',patronymic:'—',sex:'ЖЕН',birthyear:'2007',place:'Москва',issuer:'ГУ МВД России по городу Москве (учебные данные)'};
+ Object.entries(values).forEach(([id,value])=>{document.getElementById(id).innerText=value});
+ document.getElementById('passport').classList.toggle('en',english);
+ change.textContent=english?'Вернуть кириллицу':'Заменить на латиницу';
+ document.getElementById('state').textContent=english?'Сейчас данные записаны латиницей.':'Сейчас данные записаны кириллицей.';
+}
+</script></main><footer>LEBEDEVA STUDIO · Учебный проект · Лебедева Мария · БЮРЦЮ252<br><a href="index.html">На главную</a></footer></body></html>

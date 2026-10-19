@@ -1,0 +1,32 @@
+<!doctype html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Решение алгоритмической задачи | LEBEDEVA STUDIO</title><link rel="stylesheet" href="style.css"></head><body id="top"><header><div class="topline">LEBEDEVA STUDIO · ЭСТЕТИКА В КАЖДОЙ ДЕТАЛИ</div><div class="brand"><a href="index.html">LEBEDEVA STUDIO<span>CONTEMPORARY WARDROBE</span></a></div><nav class="nav"><a class="" href="index.html">Главная</a><a class="" href="catalog.html">Коллекция</a><a class="" href="contact.html">Заказ и контакты</a><a class="" href="dom.html">DOM_JS</a><a class="" href="translit.html">Кириллица → латиница</a><a class="active" href="algorithm.html">Алгоритм</a><a href="https://github.com/vmarshirov/g06u28" target="_blank" rel="noopener noreferrer">Учебные примеры ↗</a></nav></header><main><div class="anchor-nav"><a href="#part1">Раздел 1</a><a href="#part2">Раздел 2</a><a href="#top">К началу ↑</a></div><div class="page-heading" id="part1"><span class="eyebrow">JavaScript / Task 1017</span><h1>Решение алгоритмической задачи</h1><p>Индивидуальная задача № 1017 · Условный оператор if / else if / else</p></div>
+<section class="card"><h2>Условие задачи № 1017</h2><p>Дано вещественное число <strong>A</strong>. Вычислить значение <strong>x</strong>:</p><ul><li>если A &lt; 10, то x = A⁴;</li><li>если A &gt; 61, то x = A;</li><li>в остальных случаях (10 ≤ A ≤ 61) x = A − sin(A²).</li></ul><p class="note">В JavaScript функция Math.sin() принимает угол в радианах.</p>
+<form id="calc"><div class="form-grid"><label>Введите вещественное число A<input id="a" type="number" step="any" name="a" value="10" required></label></div><button class="btn" type="submit">Вычислить x</button> <button class="btn" type="reset">Сбросить</button></form><div class="result" id="answer" aria-live="polite">Введите A и нажмите «Вычислить x».</div></section>
+<section class="card" id="part2"><h2>Описание алгоритма</h2><ol><li>Получить вещественное число A из поля ввода.</li><li>Если A &lt; 10, вычислить A в четвёртой степени.</li><li>Иначе, если A &gt; 61, принять x = A.</li><li>Иначе вычислить A − sin(A²).</li><li>Показать x и использованную ветвь алгоритма.</li></ol><h3>Примеры проверки</h3><ul><li>A = 2 → x = 16.</li><li>A = 62 → x = 62.</li><li>A = 10 → x = 10 − sin(100).</li><li>A = 61 → x = 61 − sin(3721).</li></ul><p><a href="https://github.com/vmarshirov/g06u28/blob/main/030_js/public_html/0121_abc.html" target="_blank" rel="noopener noreferrer">Пример преподавателя ↗</a></p></section>
+<script>
+const form = document.getElementById('calc');
+const answer = document.getElementById('answer');
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
+  const input = document.getElementById('a');
+  if (!input.value.trim() || !Number.isFinite(input.valueAsNumber)) {
+    answer.textContent = 'Введите корректное вещественное число A.';
+    return;
+  }
+  const a = input.valueAsNumber;
+  let x, formula;
+  if (a < 10) {
+    x = a ** 4;
+    formula = 'A⁴ (A < 10)';
+  } else if (a > 61) {
+    x = a;
+    formula = 'A (A > 61)';
+  } else {
+    x = a - Math.sin(a ** 2);
+    formula = 'A − sin(A²) (10 ≤ A ≤ 61)';
+  }
+  answer.textContent = `A = ${a}; формула: ${formula}; результат: x = ${x}`;
+});
+form.addEventListener('reset', function() {
+  answer.textContent = 'Введите A и нажмите «Вычислить x».';
+});
+</script></main><footer>LEBEDEVA STUDIO<br>Учебный проект · Лебедева Мария · БЮРЦЮ252<br><a href="index.html">На главную</a> · <a href="contact.html">Связаться</a></footer></body></html>
